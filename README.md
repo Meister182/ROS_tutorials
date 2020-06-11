@@ -1,4 +1,26 @@
-## [00] Setting up Ros
+## [01] Creating a ROS environment
+
+```bash
+# Create your directory
+mkdir -p ~/ROS_tutorials/src
+
+# Create ROS environment
+cd ~/ROS_tutorials/
+catkin_make
+
+# Overaling Workspace
+source devel/setup.bash
+
+# Checking all is OK
+echo $ROS_PACKAGE_PATH
+#output: /home/user/ROS_tutorials/src:/opt/ros/kinetic/share
+```
+
+
+
+---
+<details closed>
+<summary> [00] Setting up Ros </summary>
 
 ```bash
 # Accepting software from packages.ros.org.
@@ -23,6 +45,6 @@ env | grep ROS
 # installing some build dependecies
 sudo apt install python-rosinstall python-rosinstall-generator python-wstool build-essential
 ```
-
+</details>
 
 - #### Following along | Ros tutorials : http://wiki.ros.org/ROS/Tutorials
