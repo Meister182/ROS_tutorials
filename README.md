@@ -1,4 +1,34 @@
-## [06] Creating a ROS message and service
+## [07] Publisher Subscriber | Vscode including ros path.
+
+```bash
+mkdir -p ~/ROS_tutorials/.vscode/
+touch ~/ROS_tutorials/.vscode/c_pp_properties.json
+```
+### c_pp_properties.json :
+```json
+{
+  "configurations": [
+    {
+      "name": "Linux",
+      "includePath": [
+        "${workspaceFolder}/**",
+        "/opt/ros/kinetic/include"c_pp_properties.json
+      ],
+      "defines": [],
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "c11",
+      "cppStandard": "c++17",
+      "intelliSenseMode": "clang-x64"
+    }
+  ],
+  "version": 4
+}
+```
+
+
+---
+<details>
+<summary> [06] Creating a ROS message and service </summary>
 
   - msg: msg files are simple text files that describe the fields of a ROS message. They are used to generate source code for messages in different languages.
   - srv: an srv file describes a service. It is composed of two parts: a request and a response.
@@ -99,6 +129,7 @@ add_service_files(
 ```
 </details>
 <br>
+</details>
 
 ---
 <details>
