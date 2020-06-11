@@ -150,6 +150,15 @@ target_link_libraries(listener ${catkin_LIBRARIES})
 add_dependencies(talker myRosPackage_generate_messages_cpp)
 add_dependencies(listener myRosPackage_generate_messages_cpp)
 
+
+add_executable(add_two_ints_server src/myServer.cpp)
+target_link_libraries(add_two_ints_server ${catkin_LIBRARIES})
+add_dependencies(add_two_ints_server myRosPackage_generate_messages_cpp)
+
+add_executable(add_two_ints_client src/myClient.cpp)
+target_link_libraries(add_two_ints_client ${catkin_LIBRARIES})
+add_dependencies(add_two_ints_client myRosPackage_generate_messages_cpp)
+
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}

@@ -1,4 +1,22 @@
-## [08] Service Client (C++)
+## [08] Service Client (C++) | Build
+
+```bash
+# Add to CMakeLists.txt :
+add_executable(add_two_ints_server src/myServer.cpp)
+target_link_libraries(add_two_ints_server ${catkin_LIBRARIES})
+add_dependencies(add_two_ints_server myRosPackage_generate_messages_cpp)
+
+add_executable(add_two_ints_client src/myClient.cpp)
+target_link_libraries(add_two_ints_client ${catkin_LIBRARIES})
+add_dependencies(add_two_ints_client myRosPackage_generate_messages_cpp)
+
+# Building
+cd ~/ROS_tutorials/
+catkin_make
+```
+
+<details closed>
+<summary> [08] Service Client (C++) </summary>
 
 ```bash
 # Create a src directory inside the package
@@ -95,6 +113,7 @@ bool add(myRosPackage::AddTwoIntsCopy::Request  &req,
 
 </details>
 <br>
+</details>
 </details>
 
 
