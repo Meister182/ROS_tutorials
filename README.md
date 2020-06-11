@@ -1,4 +1,127 @@
-## [07] Publisher Subscriber (C++) | Build
+## [08] Service Client (C++)
+
+```bash
+# Create a src directory inside the package
+mkdir -p ~/ROS_tutorials/src/myRosPackage/src
+
+# Create a Service.cpp
+touch ~/ROS_tutorials/src/myRosPackage/src/myService.cpp
+
+# Create a Client.cpp
+touch ~/ROS_tutorials/src/myRosPackage/src/myClient.cpp
+```
+
+<details closed>
+<summary> myService.cpp : </summary>
+
+- ### Include files :
+```cpp
+#include "ros/ros.h"
+//my service created in [06] Creating a ROS message and service
+#include "myRosPackage/AddTwoIntsCopy.h"  
+```
+
+- ### ROS configs :
+```cpp
+  // Initialize the node "add_two_ints_server"
+  ros::init(argc, argv, "add_two_ints_server"); 
+  ros::NodeHandle n;
+  
+  // The service is created and advertised over ROS
+  ros::ServiceServer service = n.advertiseService("add_two_ints", add);
+  ROS_INFO("Ready to add two ints.");
+  ros::spin();
+```
+- ### Service code :
+```cpp
+// Callback function that will get called when this service is requested.
+bool add(myRosPackage::AddTwoIntsCopy::Request  &req,
+         myRosPackage::AddTwoIntsCopy::Response &res)
+{
+  res.sum = req.a + req.b;
+  ROS_INFO("request: x=%ld, y=%ld", (long int)req.a, (long int)req.b);
+  ROS_INFO("sending back response: [%ld]", (long int)res.sum);
+  return true;
+}
+
+```
+
+</details>
+
+<details closed>
+<summary> myClient.cpp : </summary>
+
+- ### Include files :
+```cpp
+#include "ros/ros.h"
+#include <cstdlib>
+//my service created in [06] Creating a ROS message and service
+#include "myRosPackage/AddTwoIntsCopy.h"
+```
+
+- ### ROS configs :
+```cpp
+  // Creates a client for the add_two_ints service.
+  ros::NodeHandle n;
+  ros::ServiceClient client = n.serviceClient<myRosPackage::AddTwoIntsCopy>("add_two_ints");
+```
+
+- ### Client code :
+```cpp
+  // Verify input
+  ros::init(argc, argv, "add_two_ints_client");
+  if (argc != 3)
+  {
+    ROS_INFO("usage: add_two_ints_client X Y");
+    return 1;
+  }
+
+  // Building the request
+  myRosPackage::AddTwoIntsCopy srv;
+  srv.request.a = atoll(argv[1]);
+  srv.request.b = atoll(argv[2]);
+
+  // Try to call service with the request
+  if (client.call(srv))
+  {
+    ROS_INFO("Sum: %ld", (long int)srv.response.sum);
+  }
+  else
+  {
+    ROS_ERROR("Failed to call service add_two_ints");
+    return 1;
+  }
+```
+
+</details>
+<br>
+</details>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+<details closed>
+<summary> [07] Publisher Subscriber (C++) | Build </summary>
 
 ```bash
 # Add to CMakeLists.txt :
@@ -14,8 +137,8 @@ add_dependencies(listener myRosPackage_generate_messages_cpp)
 cd ~/ROS_tutorials/
 catkin_make
 ```
+</details>
 
----
 <details closed>
 <summary> [07] Publisher Subscriber (C++) | Creation </summary>
 
@@ -121,7 +244,6 @@ void chatterCallback(const std_msgs::String::ConstPtr& msg)
 <br>
 </details>
 
----
 <details closed>
 <summary> [07] Publisher Subscriber (C++) | Vscode including ros path. </summary>
 
