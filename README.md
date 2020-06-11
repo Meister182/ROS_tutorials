@@ -1,4 +1,109 @@
-## [07] Publisher Subscriber | Vscode including ros path.
+## [07] Publisher Subscriber (C++)
+
+```bash
+# Create a src directory inside the package
+mkdir -p ~/ROS_tutorials/src/myRosPackage/src
+
+# Create a Publisher.cpp
+touch ~/ROS_tutorials/src/myRosPackage/src/myPublisher.cpp
+
+# Create a Subscriber.cpp
+touch ~/ROS_tutorials/src/myRosPackage/src/mySubscriber.cpp
+```
+
+<details closed>
+<summary> myPublisher.cpp : </summary>
+
+- ### Include files :
+```cpp
+#include "ros/ros.h"            // the most common public pieces of the ROS system
+#include "std_msgs/String.h"    // a message from the std_msgs package
+```
+
+- ### ROS configs :
+```cpp
+  // Initialize ROS
+  ros::init(argc, argv, "talker");
+  
+  // A handle to this process' node, also initializes the node "talker"
+  ros::NodeHandle n;
+  
+  // Advertise that we are going to be publishing std_msgs/String messages on the chatter topic to the master
+  ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
+  
+  // Specify the loop frequency, It will keep track of how long it has been since the last call to Rate::sleep().
+  ros::Rate loop_rate(10);
+```
+- ### Publisher code :
+```cpp
+  int count = 0;
+  while (ros::ok())
+  {
+    // Create a message
+    std_msgs::String msg;
+    std::stringstream ss;
+
+    // Add info to the message
+    ss << "hello world " << count;
+    msg.data = ss.str();
+
+    // debug
+    ROS_INFO("%s", msg.data.c_str());
+
+    //Publish message
+    chatter_pub.publish(msg); // 
+
+    // In case this node is also subscriber, spinOnce() is necessary for the callbacks to be called
+    // ros::spinOnce();
+
+    // sleep for the time remaining to let us hit our 10Hz publish rate.
+    loop_rate.sleep();
+    ++count;
+  }
+```
+
+</details>
+
+<details closed>
+<summary> mySubscriber.cpp : </summary>
+
+- ### Include files :
+```cpp
+#include "ros/ros.h"            // the most common public pieces of the ROS system
+#include "std_msgs/String.h"    // a message from the std_msgs package
+```
+
+- ### ROS configs :
+```cpp
+  // Initialize ROS
+  ros::init(argc, argv, "listener");
+  
+  // A handle to this process' node, also initializes the node "listener"
+  ros::NodeHandle n;
+
+  // Subscribe to the chatter topic
+  ros::Subscriber sub = n.subscribe("chatter", 1000, chatterCallback);
+
+  // ros::spin() enters a loop, calling message callbacks as fast as possible.
+  ros::spin();
+  // ros::spin() will exit once ros::ok() returns false, which means ros::shutdown() has been called.
+```
+
+- ### Subscriber code :
+```cpp
+// Callback function that will get called when a new message has arrived on the chatter topic.
+void chatterCallback(const std_msgs::String::ConstPtr& msg)
+{
+  ROS_INFO("I heard: [%s]", msg->data.c_str());
+}
+```
+
+</details>
+<br>
+
+---
+<details closed>
+<summary> [07] Publisher Subscriber (C++) | Vscode including ros path. </summary>
 
 ```bash
 mkdir -p ~/ROS_tutorials/.vscode/
@@ -24,7 +129,7 @@ touch ~/ROS_tutorials/.vscode/c_pp_properties.json
   "version": 4
 }
 ```
-
+</details>
 
 ---
 <details>
