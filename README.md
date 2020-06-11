@@ -1,4 +1,24 @@
-## [04] Launch files
+## [05] Debugging with rqt
+
+```bash
+- rqt is a software framework of ROS that implements the various GUI tools in the form of plugins, making it easier to manage all the various windows on the screen at one moment.
+ 
+# The GUI tools can run in a traditional standalone method.
+rqt_logger_level   # to chose which message to show [Fatal, Error, Warn, Info, Debug]
+rqt_console        # A consolo to monitor messages
+rqt_graph          # See which nodes publish and subscribe to which topics
+
+
+# Or as dockable windows within rqt.
+rqt      # then go to puglins and select which one you want to use.
+
+# Its even possible to create your own plugins
+http://wiki.ros.org/rqt/Tutorials/Create%20your%20new%20rqt%20plugin
+```
+
+---
+<details closed>
+<summary> [04] Launch files </summary>
 
 ```bash
     - launch files allow you to run multiple nodes at once
@@ -39,7 +59,7 @@
     # Testing:
     rostopic pub /turtlesim1/turtle1 cmd_vel geometry_msgs/Twist -r 1 -- '[2.0, 0.0, 0.0]' '[0.0, 0.0, -1.8]'
 ```
-
+</details>
 
 ---
 <details closed>
