@@ -1,0 +1,12 @@
+background_b: 255
+background_g: 86
+background_r: 69
+rosdistro: 'kinetic
+
+  '
+roslaunch:
+  uris: {host_cpu__43203: 'http://cpu:43203/'}
+rosversion: '1.12.14
+
+  '
+run_id: fabf52d4-d995-11e9-b233-40e2305b4a83

@@ -1,5 +1,186 @@
-## [02] Creating a ROS package
+## [03] Nodes, Topics, Services & Parameters
 
+```bash
+# Quick Overview of Graph Concepts:
+  - Nodes: A node is an executable that uses ROS to communicate with other nodes.
+  - Messages: ROS data type used when subscribing or publishing to a topic.
+  - Topics: Nodes can publish messages to a topic as well as subscribe to a topic to receive messages.
+  - Services: another way that nodes can communicate, allows nodes to send a request and receive a response.
+  - Master: Name service for ROS (i.e. helps nodes find each other)
+  - rosout: ROS equivalent of stdout/stderr
+  - roscore: Master + rosout + parameter server (parameter server will be introduced later)
+```
+
+<details>
+<summary> ROS Nodes </summary>
+
+```bash
+# Nodes: A node is an executable that uses ROS to communicate with other nodes.
+
+# Example:
+## Terminal 0: Launch the ROS master node
+roscore
+
+## Terminal 1: Run a Package (turtlesim)
+rosrun turtlesim turtlesim_node
+
+## Terminal 2: List all nodes
+rosnode list
+##output:
+#/rosout
+#/turtlesim
+```
+</details>
+
+<details>
+<summary> Topics </summary>
+
+```bash
+# Topics: Nodes can publish messages to a topic as well as subscribe to a topic to receive messages.
+
+# Example: Making turtle sim move
+#(Following the Nodes example)
+
+## Terminal 2: List all topics
+rostopic list
+##output:
+#/rosout
+#/rosout_agg
+#/turtle1/cmd_vel
+#/turtle1/color_sensor
+#/turtle1/pose
+
+## Terminal 2: Who subscribes to /turtle1/cmd_vel
+rostopic info /turtle1/cmd_vel
+##ouput:
+#Type: geometry_msgs/Twist
+#
+#Publishers: None    ---> it has no publishers 
+#
+#Subscribers:        ---> the turtlesim is waiting for some node to publish something here
+# * /turtlesim (http://cpu:44857/)
+
+## Terminal 2: Posting to a topic0
+# rostopic pub <topic> <msgType> -- <msg>
+rostopic pub /turtle1/cmd_vel geometry_msgs/Twist -r 1 -- '[2.0, 0.0, 0.0]' '[0.0, 0.0, -1.8]'
+
+## Terminal 3: Check nodes!!
+nodelist
+##output:
+#/rosout
+#/rostopic_12475_1568754806388  ---> There is a new node!!
+#/turtlesim
+
+## Terminal 3: Recheck Topic info
+rostopic info /turtle1/cmd_vel
+##ouput:
+#Type: geometry_msgs/Twist
+#
+#Publishers:
+# * /rostopic_12475_1568754806388 (http://cpu:41131/)   ---> Now it has publisher
+#
+#Subscribers:        
+# * /turtlesim (http://cpu:44857/)
+
+# Tip: For more detailed info about the messages used by the topic
+rostopic type /turtle1/cmd_vel | rosmsg show
+```
+</details>
+
+
+<details closed>
+<summary> Services </summary>
+
+```bash
+# Services: another way that nodes can communicate, allows nodes to send a request and receive a response.
+
+# Example: Spawning another turtle
+#(Following the Nodes example)
+
+## Terminal 2: List all services
+rosservice list
+##output:
+#/clear
+#/kill
+#/reset
+#/rosout/get_loggers
+#/rosout/set_logger_level
+#/spawn
+#/turtle1/set_pen
+#/turtle1/teleport_absolute
+#/turtle1/teleport_relative
+#/turtlesim/get_loggers
+#/turtlesim/set_logger_level
+
+# Terminal 2: Checking input and output arguments of the /spawn service
+rosservice info /spawn
+##ouput:
+#Node: /turtlesim
+#URI: rosrpc://cpu:35097
+#Type: turtlesim/Spawn
+#Args: x y theta name
+
+# Tip: For more detailed info about the service --> rosservice type /spawn | rossrv show 
+rossrv show turtlesim/Spawn
+##output:
+#float32 x      -----> Input arguments
+#float32 y      -///
+#float32 theta  -//
+#string name    -/
+#---
+#string name    -----> Output arguments
+
+# Terminal 2: Calling a service (Spawn a second turtle)
+rosservice call /spawn  2 2 0.2 "" 
+##output:
+#name: "turtle2"
+
+# Now there are new topics in order to comunicate with turle2
+```
+</details>
+
+<details closed>
+<summary> Parameters </summary>
+
+```bash
+# Parameter: Data on the ROS Parameter Server. (integers, floats, boolean, dictionaries, and lists)
+# Parameter Server: Used by nodes to store and retrieve parameters at runtime. It's not designed for high-performance, it is best used for static, non-binary data such as configuration parameters.
+
+# Example: Changing turtlesim background color
+#(Following the Nodes example)
+
+# Terminal 2: list all parameters
+rosparam list
+##output:
+#/background_b
+#/background_g
+#/background_r
+#/rosdistro
+#/roslaunch/uris/host_cpu__43203
+#/rosversion
+#/run_id
+
+# Terminal 2: Change background_r paramenter value
+rosparam set /background_r 150
+
+# Terminal 2: Clear for changes to take effect
+rosservice call /clear
+
+
+# Tip: Getting all Parameter
+rosparam get /
+
+# Tip: Parameters can be all dump to a file and load latter. This allows to save configurations.
+rosparam dump myParams.yaml
+rosparam load myParams.yaml copy
+
+```
+</details>
+
+
+---
+<details closed>
+<summary> [02] Creating a ROS package </summary>
 ```bash
 # Don't forget to overlap your environment.
 source devel/setup.bash
@@ -17,7 +198,9 @@ cd ..
 # Building Your package
 catkin_make
 ```
+</details>
 
+---
 <details closed>
 <summary> [01] Creating a ROS environment </summary>
 
