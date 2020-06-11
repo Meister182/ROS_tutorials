@@ -166,6 +166,36 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
+myRosPackage/CMakeFiles/listener.dir/rule:
+	cd /home/alex/Desktop/ROS_tutorials/build && $(MAKE) -f CMakeFiles/Makefile2 myRosPackage/CMakeFiles/listener.dir/rule
+.PHONY : myRosPackage/CMakeFiles/listener.dir/rule
+
+# Convenience name for target.
+listener: myRosPackage/CMakeFiles/listener.dir/rule
+
+.PHONY : listener
+
+# fast build rule for target.
+listener/fast:
+	cd /home/alex/Desktop/ROS_tutorials/build && $(MAKE) -f myRosPackage/CMakeFiles/listener.dir/build.make myRosPackage/CMakeFiles/listener.dir/build
+.PHONY : listener/fast
+
+# Convenience name for target.
+myRosPackage/CMakeFiles/talker.dir/rule:
+	cd /home/alex/Desktop/ROS_tutorials/build && $(MAKE) -f CMakeFiles/Makefile2 myRosPackage/CMakeFiles/talker.dir/rule
+.PHONY : myRosPackage/CMakeFiles/talker.dir/rule
+
+# Convenience name for target.
+talker: myRosPackage/CMakeFiles/talker.dir/rule
+
+.PHONY : talker
+
+# fast build rule for target.
+talker/fast:
+	cd /home/alex/Desktop/ROS_tutorials/build && $(MAKE) -f myRosPackage/CMakeFiles/talker.dir/build.make myRosPackage/CMakeFiles/talker.dir/build
+.PHONY : talker/fast
+
+# Convenience name for target.
 myRosPackage/CMakeFiles/myRosPackage_genpy.dir/rule:
 	cd /home/alex/Desktop/ROS_tutorials/build && $(MAKE) -f CMakeFiles/Makefile2 myRosPackage/CMakeFiles/myRosPackage_genpy.dir/rule
 .PHONY : myRosPackage/CMakeFiles/myRosPackage_genpy.dir/rule
@@ -585,6 +615,60 @@ myRosPackage_geneus/fast:
 	cd /home/alex/Desktop/ROS_tutorials/build && $(MAKE) -f myRosPackage/CMakeFiles/myRosPackage_geneus.dir/build.make myRosPackage/CMakeFiles/myRosPackage_geneus.dir/build
 .PHONY : myRosPackage_geneus/fast
 
+src/myPublisher.o: src/myPublisher.cpp.o
+
+.PHONY : src/myPublisher.o
+
+# target to build an object file
+src/myPublisher.cpp.o:
+	cd /home/alex/Desktop/ROS_tutorials/build && $(MAKE) -f myRosPackage/CMakeFiles/talker.dir/build.make myRosPackage/CMakeFiles/talker.dir/src/myPublisher.cpp.o
+.PHONY : src/myPublisher.cpp.o
+
+src/myPublisher.i: src/myPublisher.cpp.i
+
+.PHONY : src/myPublisher.i
+
+# target to preprocess a source file
+src/myPublisher.cpp.i:
+	cd /home/alex/Desktop/ROS_tutorials/build && $(MAKE) -f myRosPackage/CMakeFiles/talker.dir/build.make myRosPackage/CMakeFiles/talker.dir/src/myPublisher.cpp.i
+.PHONY : src/myPublisher.cpp.i
+
+src/myPublisher.s: src/myPublisher.cpp.s
+
+.PHONY : src/myPublisher.s
+
+# target to generate assembly for a file
+src/myPublisher.cpp.s:
+	cd /home/alex/Desktop/ROS_tutorials/build && $(MAKE) -f myRosPackage/CMakeFiles/talker.dir/build.make myRosPackage/CMakeFiles/talker.dir/src/myPublisher.cpp.s
+.PHONY : src/myPublisher.cpp.s
+
+src/mySubscriber.o: src/mySubscriber.cpp.o
+
+.PHONY : src/mySubscriber.o
+
+# target to build an object file
+src/mySubscriber.cpp.o:
+	cd /home/alex/Desktop/ROS_tutorials/build && $(MAKE) -f myRosPackage/CMakeFiles/listener.dir/build.make myRosPackage/CMakeFiles/listener.dir/src/mySubscriber.cpp.o
+.PHONY : src/mySubscriber.cpp.o
+
+src/mySubscriber.i: src/mySubscriber.cpp.i
+
+.PHONY : src/mySubscriber.i
+
+# target to preprocess a source file
+src/mySubscriber.cpp.i:
+	cd /home/alex/Desktop/ROS_tutorials/build && $(MAKE) -f myRosPackage/CMakeFiles/listener.dir/build.make myRosPackage/CMakeFiles/listener.dir/src/mySubscriber.cpp.i
+.PHONY : src/mySubscriber.cpp.i
+
+src/mySubscriber.s: src/mySubscriber.cpp.s
+
+.PHONY : src/mySubscriber.s
+
+# target to generate assembly for a file
+src/mySubscriber.cpp.s:
+	cd /home/alex/Desktop/ROS_tutorials/build && $(MAKE) -f myRosPackage/CMakeFiles/listener.dir/build.make myRosPackage/CMakeFiles/listener.dir/src/mySubscriber.cpp.s
+.PHONY : src/mySubscriber.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -594,6 +678,8 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... test"
 	@echo "... install/local"
+	@echo "... listener"
+	@echo "... talker"
 	@echo "... myRosPackage_genpy"
 	@echo "... install"
 	@echo "... myRosPackage_gennodejs"
@@ -626,6 +712,12 @@ help:
 	@echo "... std_msgs_generate_messages_py"
 	@echo "... myRosPackage_generate_messages_eus"
 	@echo "... myRosPackage_geneus"
+	@echo "... src/myPublisher.o"
+	@echo "... src/myPublisher.i"
+	@echo "... src/myPublisher.s"
+	@echo "... src/mySubscriber.o"
+	@echo "... src/mySubscriber.i"
+	@echo "... src/mySubscriber.s"
 .PHONY : help
 
 

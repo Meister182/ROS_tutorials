@@ -31,6 +31,8 @@
 /home/alex/Desktop/ROS_tutorials/build/myRosPackage/CMakeFiles/rebuild_cache.dir
 /home/alex/Desktop/ROS_tutorials/build/myRosPackage/CMakeFiles/test.dir
 /home/alex/Desktop/ROS_tutorials/build/myRosPackage/CMakeFiles/install/local.dir
+/home/alex/Desktop/ROS_tutorials/build/myRosPackage/CMakeFiles/listener.dir
+/home/alex/Desktop/ROS_tutorials/build/myRosPackage/CMakeFiles/talker.dir
 /home/alex/Desktop/ROS_tutorials/build/myRosPackage/CMakeFiles/myRosPackage_genpy.dir
 /home/alex/Desktop/ROS_tutorials/build/myRosPackage/CMakeFiles/install.dir
 /home/alex/Desktop/ROS_tutorials/build/myRosPackage/CMakeFiles/myRosPackage_gennodejs.dir

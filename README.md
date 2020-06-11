@@ -1,4 +1,23 @@
-## [07] Publisher Subscriber (C++)
+## [07] Publisher Subscriber (C++) | Build
+
+```bash
+# Add to CMakeLists.txt :
+add_executable(talker src/myPublisher.cpp)
+target_link_libraries(talker ${catkin_LIBRARIES})
+add_dependencies(talker myRosPackage_generate_messages_cpp)
+
+add_executable(listener src/mySubscriber.cpp)
+target_link_libraries(listener ${catkin_LIBRARIES})
+add_dependencies(listener myRosPackage_generate_messages_cpp)
+
+# Building
+cd ~/ROS_tutorials/
+catkin_make
+```
+
+---
+<details closed>
+<summary> [07] Publisher Subscriber (C++) | Creation </summary>
 
 ```bash
 # Create a src directory inside the package
@@ -100,6 +119,7 @@ void chatterCallback(const std_msgs::String::ConstPtr& msg)
 
 </details>
 <br>
+</details>
 
 ---
 <details closed>
