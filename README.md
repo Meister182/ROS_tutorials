@@ -1,4 +1,10 @@
-## [09] Recording and playing back data
+## ROS tutorials
+
+#### Following along | Ros tutorials : http://wiki.ros.org/ROS/Tutorials
+
+---
+<details closed>
+<summary> [09] Recording and playing back data </summary>
 
 ```bash
 # Create a dumping directory. (does not need to be inside the package)
@@ -42,7 +48,7 @@ rosbag play subset
 # Terminal 4: playing back a specific topic
 rosbag play myBag --topic /turtle1/cmd_vel
 ```
-
+</details>
 
 
 ---
@@ -165,28 +171,6 @@ bool add(myRosPackage::AddTwoIntsCopy::Request  &req,
 <br>
 </details>
 </details>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ---
 <details closed>
@@ -772,5 +756,3 @@ env | grep ROS
 sudo apt install python-rosinstall python-rosinstall-generator python-wstool build-essential
 ```
 </details>
-
-- #### Following along | Ros tutorials : http://wiki.ros.org/ROS/Tutorials
