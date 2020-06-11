@@ -7,7 +7,5 @@
 # new environment variables
 
 # modified environment variables
-export CMAKE_PREFIX_PATH="/home/alex/Desktop/ROS_tutorials/devel:$CMAKE_PREFIX_PATH"
+export LD_LIBRARY_PATH="/opt/ros/kinetic/lib:/opt/ros/kinetic/lib/x86_64-linux-gnu"
 export PWD="/home/alex/Desktop/ROS_tutorials/build"
-export ROSLISP_PACKAGE_DIRECTORIES="/home/alex/Desktop/ROS_tutorials/devel/share/common-lisp"
-export ROS_PACKAGE_PATH="/home/alex/Desktop/ROS_tutorials/src:$ROS_PACKAGE_PATH"

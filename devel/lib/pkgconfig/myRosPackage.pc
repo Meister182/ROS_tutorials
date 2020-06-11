@@ -1,0 +1,8 @@
+prefix=/home/alex/Desktop/ROS_tutorials/devel
+
+Name: myRosPackage
+Description: Description of myRosPackage
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/alex/Desktop/ROS_tutorials/devel/lib 
+Requires: 

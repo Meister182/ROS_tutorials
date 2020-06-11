@@ -1,4 +1,25 @@
-## [01] Creating a ROS environment
+## [02] Creating a ROS package
+
+```bash
+# Don't forget to overlap your environment.
+source devel/setup.bash
+
+# Change diretories to your src directory.
+cd src
+
+# Creating a catkin pkg. :
+#catkin_create_pkg <package_name> [depend1] [depend2] [depend3]
+catkin_create_pkg myRosPackage std_msgs rospy roscpp
+
+# Change diretories back to your environment directory.
+cd ..
+
+# Building Your package
+catkin_make
+```
+
+<details closed>
+<summary> [01] Creating a ROS environment </summary>
 
 ```bash
 # Create your directory
@@ -15,7 +36,7 @@ source devel/setup.bash
 echo $ROS_PACKAGE_PATH
 #output: /home/user/ROS_tutorials/src:/opt/ros/kinetic/share
 ```
-
+</details>
 
 
 ---

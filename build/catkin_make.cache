@@ -1,2 +1,2 @@
-
+myRosPackage
 -DCATKIN_DEVEL_PREFIX=/home/alex/Desktop/ROS_tutorials/devel -DCMAKE_INSTALL_PREFIX=/home/alex/Desktop/ROS_tutorials/install -G Unix Makefiles
