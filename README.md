@@ -1,4 +1,53 @@
-## [08] Service Client (C++) | Build
+## [09] Recording and playing back data
+
+```bash
+# Create a dumping directory. (does not need to be inside the package)
+mkdir -p ~/ROS_tutorials/src/myRosPackage/bagfiles
+cd ~/ROS_tutorials/src/myRosPackage/bagfiles
+
+# For Recording all publish topics
+rosbag record -a -O myBag
+
+# Displaing the bag info
+rosbag info myBag
+
+# Displaing the bag info
+rosbag play myBag
+
+
+## Example
+# Terminal 0: ROS master
+roscore
+
+# Terminal 1: turtlesim_node
+rosrun turtlesim turtlesim_node 
+
+# Terminal 2: turtlesim controls
+rosrun turtlesim turtle_teleop_key
+
+# Terminal 3: RECORDING.
+#All topcis
+rosbag record -a -O myBag
+#Only a subset of topics
+rosbag record -O subset /turtle1/cmd_vel /turtle1/pose
+
+# Terminal 3: checking a bag info
+rosbag info myBag
+rosbag info subset
+
+# Terminal 4: playing back the info
+rosbag play myBag
+rosbag play subset
+
+# Terminal 4: playing back a specific topic
+rosbag play myBag --topic /turtle1/cmd_vel
+```
+
+
+
+---
+<details closed>
+<summary> [08] Service Client (C++) | Build </summary>
 
 ```bash
 # Add to CMakeLists.txt :
@@ -14,6 +63,7 @@ add_dependencies(add_two_ints_client myRosPackage_generate_messages_cpp)
 cd ~/ROS_tutorials/
 catkin_make
 ```
+</details>
 
 <details closed>
 <summary> [08] Service Client (C++) </summary>
