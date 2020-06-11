@@ -1,4 +1,49 @@
-## [03] Nodes, Topics, Services & Parameters
+## [04] Launch files
+
+```bash
+    - launch files allow you to run multiple nodes at once
+    - roslaunch starts nodes as defined in a launch file.
+
+    # Creating a launch file
+    #   - launch files do not need to e in a specific directory, they can just be in the package directory.
+    mkdir ~/ROS_tutorials/src/myRosPackage/launch
+    touch ~/ROS_tutorials/src/myRosPackage/launch/myTurtleLauncher.launch
+
+    # myTurtleLauncher.launch :
+    - Launches 2 nodes : turtlesim1 and turlesim2
+    - The nodes are of the type of turtlesim_node from the turtlesim package
+    - Also sets turtlesim2 to mimic turtlesim 1
+```
+```xml
+<launch>
+
+  <group ns="turtlesim1">
+    <node pkg="turtlesim" name="sim" type="turtlesim_node"/>
+  </group>
+
+  <group ns="turtlesim2">
+    <node pkg="turtlesim" name="sim" type="turtlesim_node"/>
+  </group>
+
+  <node pkg="turtlesim" name="mimic" type="mimic">
+    <remap from="input" to="turtlesim1/turtle1"/>
+    <remap from="output" to="turtlesim2/turtle1"/>
+  </node>
+
+</launch>
+```
+```bash
+    # launching
+    roslaunch myRosPackage 
+
+    # Testing:
+    rostopic pub /turtlesim1/turtle1 cmd_vel geometry_msgs/Twist -r 1 -- '[2.0, 0.0, 0.0]' '[0.0, 0.0, -1.8]'
+```
+
+
+---
+<details closed>
+<summary>  [03] Nodes, Topics, Services & Parameters </summary>
 
 ```bash
 # Quick Overview of Graph Concepts:
@@ -31,6 +76,7 @@ rosnode list
 #/turtlesim
 ```
 </details>
+
 
 <details>
 <summary> Topics </summary>
@@ -139,6 +185,7 @@ rosservice call /spawn  2 2 0.2 ""
 ```
 </details>
 
+
 <details closed>
 <summary> Parameters </summary>
 
@@ -176,11 +223,12 @@ rosparam load myParams.yaml copy
 
 ```
 </details>
-
+</details>
 
 ---
 <details closed>
 <summary> [02] Creating a ROS package </summary>
+
 ```bash
 # Don't forget to overlap your environment.
 source devel/setup.bash
