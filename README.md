@@ -1,4 +1,108 @@
-## [05] Debugging with rqt
+## [06] Creating a ROS message and service
+
+  - msg: msg files are simple text files that describe the fields of a ROS message. They are used to generate source code for messages in different languages.
+  - srv: an srv file describes a service. It is composed of two parts: a request and a response.
+
+<details closed>
+<summary> Create a Message </summary>
+
+```bash
+  # Message files are stored in the msg directory of a package
+  mkdir -p ~/ROS_tutorials/src/myRosPackage/msg
+  touch ~/ROS_tutorials/src/myRosPackage/msg/myMSG.msg
+
+  # Messages are just simple text files with a field type and field name per line. 
+  # The field types you can use are:
+  #   - int8, int16, int32, int64 (plus uint*)
+  #   - float32, float64
+  #   - string
+  #   - time, duration
+  #   - other msg files
+  #   - variable-length array[] and fixed-length array[C]
+
+  echo "string nickname" > ~/ROS_tutorials/src/myRosPackage/msg/myMSG.msg
+  echo "int64 score" >> ~/ROS_tutorials/src/myRosPackage/msg/myMSG.msg
+```
+
+### In order for messages to be used in C++ or Python code they need to be converted into source code. For that to happen we need to make sure that:
+  - The next two lines are in the  '/myRosPackage/package.xml' file
+```xml
+  <build_depend>message_generation</build_depend>
+  <exec_depend>message_runtime</exec_depend>
+```
+  - We add message_generation to the find_package, in '/myRosPackage/CMakeLists.txt' file
+```bash
+find_package(catkin REQUIRED COMPONENTS
+  roscpp
+  rospy
+  std_msgs
++ message_generation
+)
+```
+
+  - We uncomment the generate_messages and the add_message_files, and add our message. in '/myRosPackage/CMakeLists.txt'
+```bash
+add_message_files(
+  FILES
++  myMSG.msg
+)
+
+generate_messages(
+  DEPENDENCIES
+  std_msgs
+)
+```
+</details>
+
+<details closed>
+<summary> Create a Service </summary>
+
+
+```bash
+  # Service files are stored in the srv directory of a package
+  mkdir -p ~/ROS_tutorials/src/myRosPackage/srv
+
+  # Using an existing service
+  roscp rospy_tutorials AddTwoInts.srv srv/AddTwoIntsCopy.srv
+
+  cat srv/AddTwoIntsCopy.srv
+  #output:
+  # int64 a
+  # int64 b
+  # ---
+  # int64 sum
+
+```
+### In order for services to be used in C++ or Python code they need to be converted into source code. For that to happen we need to make sure that:
+
+  - The next two lines are in the  '/myRosPackage/package.xml' file
+```xml
+  <build_depend>message_generation</build_depend>
+  <exec_depend>message_runtime</exec_depend>
+```
+  - We add message_generation to the find_package dependecies, in '/myRosPackage/CMakeLists.txt' file
+```bash
+find_package(catkin REQUIRED COMPONENTS
+  roscpp
+  rospy
+  std_msgs
++ message_generation
+)
+```
+
+  - We uncomment the generate_messages and the add_message_files, and add our message. in '/myRosPackage/CMakeLists.txt'
+```bash
+add_service_files(
+  FILES
+  AddTwoIntsCopy.srv
+)
+```
+</details>
+<br>
+
+---
+<details>
+<summary> [05] Debugging with rqt </summary>
 
 ```bash
 - rqt is a software framework of ROS that implements the various GUI tools in the form of plugins, making it easier to manage all the various windows on the screen at one moment.
@@ -15,6 +119,8 @@ rqt      # then go to puglins and select which one you want to use.
 # Its even possible to create your own plugins
 http://wiki.ros.org/rqt/Tutorials/Create%20your%20new%20rqt%20plugin
 ```
+</details>
+
 
 ---
 <details closed>
@@ -26,7 +132,7 @@ http://wiki.ros.org/rqt/Tutorials/Create%20your%20new%20rqt%20plugin
 
     # Creating a launch file
     #   - launch files do not need to e in a specific directory, they can just be in the package directory.
-    mkdir ~/ROS_tutorials/src/myRosPackage/launch
+    mkdir -p ~/ROS_tutorials/src/myRosPackage/launch
     touch ~/ROS_tutorials/src/myRosPackage/launch/myTurtleLauncher.launch
 
     # myTurtleLauncher.launch :
@@ -243,6 +349,7 @@ rosparam load myParams.yaml copy
 
 ```
 </details>
+<br>
 </details>
 
 ---
